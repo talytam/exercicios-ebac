@@ -1,0 +1,19 @@
+{
+  "name": "testes-e2e-ebac-shop",
+  "version": "1.0.0",
+  "description": "Ebac shop: http://lojaebac.ebaconline.art.br/",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "cy:open": "npx cypress open",
+    "cy:run": "npx cypress run --browser chrome",
+    "cy:report": "npx cypress run --record --key a71adc1f-e151-45a6-a2fd-1e0c8ab583af"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^13.0.0",
+    "faker": "^5.5.3"
+  }
+}
