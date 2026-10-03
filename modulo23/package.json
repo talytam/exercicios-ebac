@@ -1,0 +1,12 @@
+{
+  "name": "modulo23",
+  "version": "1.0.0",
+  "description": "Exercício de Cypress com Intercept e AppActions - EBAC",
+  "scripts": {
+    "test": "cypress run --spec \"cypress/e2e/login.cy.js\" --browser chrome"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^16.1.1"
+  }
+}
