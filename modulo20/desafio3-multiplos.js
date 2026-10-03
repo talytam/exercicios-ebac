@@ -11,3 +11,5 @@ function somarMultiplos() {
 }
 
 console.log(somarMultiplos());
+
+module.exports = somarMultiplos;

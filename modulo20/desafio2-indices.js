@@ -21,3 +21,5 @@ function encontrarIndices(valores) {
 const numeros = [10, 3, 25, 7, 1];
 
 console.log(encontrarIndices(numeros));
+
+module.exports = encontrarIndices;
