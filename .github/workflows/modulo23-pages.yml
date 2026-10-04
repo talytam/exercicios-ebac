@@ -1,0 +1,78 @@
+﻿name: Modulo 23 - Cypress e GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "modulo23/**"
+      - ".github/workflows/modulo23-pages.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  test-and-deploy:
+    runs-on: ubuntu-latest
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: modulo23/package-lock.json
+
+      - name: Instalar dependencias dos testes
+        working-directory: modulo23
+        run: npm ci
+
+      - name: Clonar e iniciar Hub de Leitura
+        run: |
+          git clone --depth 1 https://github.com/EBAC-QE/hub-de-leitura-integrado.git /tmp/hub-de-leitura
+          cd /tmp/hub-de-leitura
+          npm ci
+          npm start > /tmp/hub-de-leitura.log 2>&1 &
+
+          for i in {1..30}; do
+            if curl -fsS http://localhost:3000/api/health > /dev/null; then
+              echo "Hub de Leitura iniciado com sucesso."
+              exit 0
+            fi
+            sleep 2
+          done
+
+          echo "O Hub de Leitura nao iniciou a tempo."
+          cat /tmp/hub-de-leitura.log
+          exit 1
+
+      - name: Executar testes Cypress e gerar relatorio
+        working-directory: modulo23
+        run: |
+          npx cypress run \
+            --spec "cypress/e2e/login.cy.js" \
+            --browser chrome \
+            --reporter mochawesome \
+            --reporter-options "reportDir=mochawesome-report,reportFilename=index,overwrite=true,html=true,json=true"
+
+      - name: Configurar GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Enviar relatorio para GitHub Pages
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: modulo23/mochawesome-report
+
+      - name: Publicar GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
