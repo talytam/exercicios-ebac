@@ -1,0 +1,62 @@
+// Exercício 1 - NoSQL
+// Banco utilizado: books.json
+// Collection: books
+
+
+// 1. Livros que NÃO estão com status publicado
+// e possuem pageCount menor que 300
+
+db.books.find(
+  {
+    status: { $ne: "PUBLISH" },
+    pageCount: { $lt: 300 }
+  },
+  {
+    _id: 0,
+    title: 1,
+    status: 1,
+    pageCount: 1
+  }
+);
+
+
+// 2. Livros que contêm MongoDB ou SQL Server no título
+
+db.books.find(
+  {
+    title: { $regex: /(MongoDB|SQL Server)/i }
+  },
+  {
+    _id: 0,
+    title: 1
+  }
+);
+
+
+// 3. Livros cujo ISBN começa com 18
+
+db.books.find(
+  {
+    isbn: { $regex: /^18/ }
+  },
+  {
+    _id: 0,
+    title: 1,
+    isbn: 1
+  }
+);
+
+
+// 4. Livros que contêm JAVA ou Mobile na longDescription,
+// independentemente de maiúsculas ou minúsculas
+
+db.books.find(
+  {
+    longDescription: { $regex: /\b(JAVA|Mobile)\b/i }
+  },
+  {
+    _id: 0,
+    title: 1,
+    longDescription: 1
+  }
+);

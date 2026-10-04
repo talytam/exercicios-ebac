@@ -1,0 +1,34 @@
+// Exercício 2 - NoSQL
+// Banco utilizado: books.json
+// Collection: books
+
+
+// 1. Quantidade de livros que NÃO estão publicados
+// e possuem pageCount menor que 300
+
+db.books.countDocuments({
+  status: { $ne: "PUBLISH" },
+  pageCount: { $lt: 300 }
+});
+
+
+// 2. Quantidade de livros que contêm MongoDB ou SQL Server no título
+
+db.books.countDocuments({
+  title: { $regex: /(MongoDB|SQL Server)/i }
+});
+
+
+// 3. Quantidade de livros cujo ISBN começa com 18
+
+db.books.countDocuments({
+  isbn: { $regex: /^18/ }
+});
+
+
+// 4. Quantidade de livros que contêm JAVA ou Mobile
+// na longDescription, sem diferenciar maiúsculas de minúsculas
+
+db.books.countDocuments({
+  longDescription: { $regex: /\b(JAVA|Mobile)\b/i }
+});
