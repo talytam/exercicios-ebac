@@ -24,7 +24,7 @@ module.exports = defineConfig({
     },
 
     baseUrl: "http://localhost:3000/",
-    projectId: "5rckft",
+    projectId: "9qq4en",
     video: true
   }
 });
