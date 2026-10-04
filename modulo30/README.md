@@ -35,3 +35,8 @@ As credenciais necessárias são armazenadas em GitHub Secrets.
 Durante a adaptação do fluxo completo para o Device Farm, o app Loja EBAC apresentou instabilidade no carregamento de produtos e no carrinho. Para a atividade de CI, o workflow executa uma validação estável de autenticação no dispositivo iOS, comprovando a integração entre GitHub Actions, Appium/WebdriverIO e BrowserStack.
 
 O BrowserStack grava o vídeo da sessão executada, que pode ser utilizado como evidência da atividade.
+
+
+## Evidência
+
+Vídeo da execução do teste iOS no BrowserStack: `evidencias/execucao-browserstack.mp4`.
