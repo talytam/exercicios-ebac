@@ -1,4 +1,4 @@
-const { spec, flow, reporter } = require("pactum");
+﻿const { spec, flow, reporter } = require("pactum");
 const pf = require("pactum-flow-plugin");
 
 describe("Testes de Contrato", () => {
@@ -13,7 +13,7 @@ describe("Testes de Contrato", () => {
   let token;
 
   before(async () => {
-    pf.config.url = "http://localhost:8080";
+    pf.config.url = process.env.PACTUM_FLOW_URL || "http://localhost:8080";
     pf.config.projectId = "exercicio-modulo24-api";
     pf.config.projectName = "Exercicio Modulo 24 API";
     pf.config.version = `1.0.${Date.now()}`;

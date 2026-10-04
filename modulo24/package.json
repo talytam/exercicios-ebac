@@ -4,7 +4,7 @@
   "description": "Exercício de automação de API com PactumJS - Módulo 24 EBAC",
   "main": "index.js",
   "scripts": {
-    "test": "mocha ./test/**/*.test.js"
+    "test": "mocha --recursive test"
   },
   "keywords": [],
   "author": "",
