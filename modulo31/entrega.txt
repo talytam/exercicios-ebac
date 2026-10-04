@@ -1,0 +1,39 @@
+Módulo 31 - Métricas de Qualidade
+
+Projetos no Cypress Cloud:
+
+Teste EBAC UI
+https://cloud.cypress.io/projects/9qq4en
+
+Execução analisada:
+https://cloud.cypress.io/projects/9qq4en/runs/2
+
+Resultado:
+- 2 testes executados
+- 2 testes aprovados
+- 0 falhas
+- taxa de sucesso de 100%
+- duração aproximada de 4 segundos
+
+Teste EBAC API
+https://cloud.cypress.io/projects/twwwd7
+
+Execução analisada:
+https://cloud.cypress.io/projects/twwwd7/runs/1
+
+Resultado:
+- 3 testes executados
+- 3 testes aprovados
+- 0 falhas
+- taxa de sucesso de 100%
+- duração aproximada de 4 segundos
+
+Análise:
+
+As duas execuções apresentaram 100% de sucesso, sem falhas e com baixo tempo de execução.
+
+O projeto do módulo 23 possui uma quantidade maior de testes, mas apresentou duração semelhante à execução do módulo 22. Como nenhuma das execuções apresentou falhas, não houve dados relevantes para análise de falhas recorrentes, erros mais comuns ou testes flaky.
+
+Os resultados indicam estabilidade nas execuções analisadas, porém uma única execução de cada projeto não é suficiente para avaliar tendências de longo prazo. Com mais execuções, o Cypress Cloud permitirá acompanhar possíveis regressões, aumento no tempo de execução, reincidência de erros e instabilidade dos testes.
+
+Os dois projetos foram configurados como públicos no Cypress Cloud.
