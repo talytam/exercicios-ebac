@@ -1,0 +1,20 @@
+{
+  "name": "exercicio-modulo24-api",
+  "version": "1.0.0",
+  "description": "Exercício de automação de API com PactumJS - Módulo 24 EBAC",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha ./test/**/*.test.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "mocha": "^10.3.0",
+    "pactum": "^3.6.0"
+  },
+  "dependencies": {
+    "pactum-flow-plugin": "^0.1.4",
+    "pactum-matchers": "^1.1.6"
+  }
+}
