@@ -1,0 +1,73 @@
+﻿name: Modulo 24 - API e GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "test/**"
+      - "package.json"
+      - "package-lock.json"
+      - "docker-compose.yml"
+      - ".github/workflows/modulo24-pages.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  test-and-deploy:
+    runs-on: ubuntu-latest
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Instalar dependencias
+        run: npm ci
+
+      - name: Iniciar Pactum Flow e MongoDB
+        run: |
+          docker compose up -d
+
+          for i in {1..30}; do
+            if curl -fsS http://localhost:8080 > /dev/null; then
+              echo "Pactum Flow iniciado com sucesso."
+              exit 0
+            fi
+            sleep 2
+          done
+
+          echo "O Pactum Flow nao iniciou a tempo."
+          docker compose logs
+          exit 1
+
+      - name: Executar testes e gerar relatorio
+        run: |
+          npx mocha "./test/**/*.test.js" \
+            --reporter mochawesome \
+            --reporter-options "reportDir=mochawesome-report,reportFilename=index,overwrite=true,html=true,json=true"
+
+      - name: Configurar GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Enviar relatorio para GitHub Pages
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: mochawesome-report
+
+      - name: Publicar GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
