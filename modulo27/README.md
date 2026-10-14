@@ -23,3 +23,29 @@ Resultado validado no container:
 ## Imagem publicada
 
 `talytamoy/exercicio-modulo24-api:latest`
+
+
+## Executando a imagem com Pactum Flow
+
+Para executar a imagem de testes junto ao Pactum Flow, primeiro inicie os serviços do projeto:
+
+```bash
+docker compose up -d
+```
+
+Identifique a rede criada pelo Docker Compose:
+
+```bash
+docker network ls
+```
+
+Em seguida, execute a imagem na mesma rede e informe a URL do Pactum Flow usando o nome do serviço `flows`:
+
+```bash
+docker run --rm \
+  --network <nome-da-rede-do-compose> \
+  -e PACTUM_FLOW_URL=http://flows:8080 \
+  talytamoy/exercicio-modulo24-api:latest
+```
+
+O endereço `localhost:8080` dentro do container de testes aponta para o próprio container. Por isso, para acessar o Pactum Flow pela rede Docker, deve ser utilizado `http://flows:8080`.
