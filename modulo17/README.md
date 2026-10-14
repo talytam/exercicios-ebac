@@ -33,9 +33,40 @@ O projeto utiliza o padrão **Screen Object** para separar as interações com a
 
 Os elementos da tela são localizados principalmente através de **Accessibility ID**.
 
+## Pré-requisitos
+
+- Node.js instalado;
+- Android Studio configurado;
+- Appium e UiAutomator2 disponíveis no projeto;
+- Emulador Android configurado.
+
+### Emulador utilizado
+
+- Nome: `ebac`
+- Android: `15.0`
+
+Caso utilize outro emulador, ajuste `appium:deviceName` e `appium:platformVersion` no arquivo:
+
+`config/wdio.android.app.conf.ts`
+
+### Aplicativo
+
+O arquivo APK deve ser colocado no seguinte caminho:
+
+`apps/android.wdio.native.app.v2.2.0.apk`
+
+A pasta `apps/` não é versionada no repositório.
+
 ## Execução
+
+Instale as dependências:
+
+```bash
+npm install
+```
 
 Com o emulador Android iniciado, execute:
 
 ```bash
-npx wdio run ./config/wdio.android.app.conf.ts --spec ../tests/specs/app.login.spec.ts
+npm run android.app
+```
