@@ -27,5 +27,6 @@ Entao("devo ser direcionado para o dashboard", () => {
 Entao("devo visualizar uma mensagem de erro de login", () => {
     cy.get("#alert-container")
         .should("be.visible")
-        .and("have.class", "alert-danger");
+        .and("have.class", "alert-danger")
+        .and("contain.text", "Email ou senha incorretos.");
 });
