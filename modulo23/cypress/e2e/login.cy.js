@@ -1,4 +1,3 @@
-
 const { loginAppActions } = require("../support/appActions/login.appActions");
 
 describe("Login no Hub de Leitura", () => {
@@ -37,13 +36,19 @@ describe("Login no Hub de Leitura", () => {
       .and("have.class", "alert-danger");
   });
 
-  it("deve realizar login usando AppActions", () => {
-  loginAppActions.realizarLogin(
-    "usuario@teste.com",
-    "user123"
-  );
+  it("deve realizar login usando App Actions", () => {
+    loginAppActions.realizarLogin(
+      "usuario@teste.com",
+      "user123"
+    );
 
-  cy.url().should("include", "dashboard");
-});
+    cy.url().should("include", "dashboard");
+
+    cy.window().then((win) => {
+      expect(win.localStorage.getItem("authToken")).to.exist;
+      expect(win.localStorage.getItem("userId")).to.exist;
+      expect(win.localStorage.getItem("userName")).to.exist;
+    });
+  });
 
 });
