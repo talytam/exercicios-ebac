@@ -22,9 +22,11 @@ O fluxo completo de checkout desenvolvido no módulo 29 continua disponível no 
 
 ## Execução no GitHub Actions
 
-O workflow está em:
+O workflow está na raiz do repositório, no caminho:
 
-`.github/workflows/ci.yml`
+`.github/workflows/modulo30-ci.yml`
+
+Os comandos do pipeline são executados dentro da pasta `modulo30`, mantendo os arquivos do exercício organizados sem impedir o reconhecimento do workflow pelo GitHub Actions.
 
 Ele é executado em pushes para a branch `ci` e também pode ser iniciado manualmente pela aba **Actions** do GitHub.
 
