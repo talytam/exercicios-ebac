@@ -1,4 +1,4 @@
-﻿# Módulo 18 - Testes de Performance com JMeter
+# Módulo 18 - Testes de Performance com JMeter
 
 Exercício de teste de performance utilizando Apache JMeter.
 
@@ -9,10 +9,13 @@ Exercício de teste de performance utilizando Apache JMeter.
 - Ramp-up: 60 segundos
 - Duração: 3 minutos
 - Massa de dados: arquivo CSV com 10 termos de busca
+- Validação: status HTTP 200
 
 ## Arquivos
 
-- 	este-performance-youtube.jmx - Plano de teste do JMeter
+- teste-performance-youtube.jmx - Plano de teste do JMeter
 - dados.csv - Massa de dados utilizada nas requisições
 
-O script utiliza os termos do arquivo CSV para realizar buscas no YouTube por meio do parâmetro search_query.
+O script utiliza os termos do arquivo CSV para realizar buscas no YouTube por meio do parâmetro `search_query`.
+
+O arquivo `dados.csv` é referenciado de forma relativa pelo plano de teste, permitindo executar o projeto em outro ambiente sem depender de um caminho local específico.
