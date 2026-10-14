@@ -40,10 +40,10 @@ Os elementos da tela são localizados principalmente através de **Accessibility
 - Appium e UiAutomator2 disponíveis no projeto;
 - Emulador Android configurado.
 
-### Emulador utilizado
+### Configuração utilizada no Appium
 
-- Nome: `ebac`
-- Android: `15.0`
+- `appium:deviceName`: `ebac`
+- `appium:platformVersion`: `15.0`
 
 Caso utilize outro emulador, ajuste `appium:deviceName` e `appium:platformVersion` no arquivo:
 
