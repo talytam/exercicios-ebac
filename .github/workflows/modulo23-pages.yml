@@ -66,13 +66,16 @@ jobs:
             --reporter-options "reportDir=mochawesome-report,reportFilename=index,overwrite=true,html=true,json=true"
 
       - name: Configurar GitHub Pages
+        if: always()
         uses: actions/configure-pages@v5
 
       - name: Enviar relatorio para GitHub Pages
+        if: always()
         uses: actions/upload-pages-artifact@v4
         with:
           path: modulo23/mochawesome-report
 
       - name: Publicar GitHub Pages
+        if: always()
         id: deployment
         uses: actions/deploy-pages@v4
