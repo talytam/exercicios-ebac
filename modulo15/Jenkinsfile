@@ -4,20 +4,27 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/talytam/teste-ebac-ui.git'
-                bat 'npm install'
+                checkout scm
             }
         }
 
-
-        stage('Tests') {
+        stage('Instalar dependências') {
             steps {
+                dir('modulo15') {
+                    bat 'npm install'
+                }
+            }
+        }
 
-bat '''set NO_COLOR=1'
-
-npm run cy:run'''
+        stage('Testes') {
+            steps {
+                dir('modulo15') {
+                    bat '''
+set NO_COLOR=1
+npm run cy:run
+'''
+                }
             }
         }
     }
 }
-
