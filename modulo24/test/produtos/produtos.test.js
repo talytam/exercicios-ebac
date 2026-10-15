@@ -26,7 +26,7 @@ describe("Serviço de Produtos", () => {
   });
 
   it("deve adicionar um produto", async () => {
-    await spec()
+    const respostaCriacao = await spec()
       .post(urlGraphQL)
       .withHeaders("Authorization", token)
       .withGraphQLQuery(`
@@ -83,6 +83,12 @@ describe("Serviço de Produtos", () => {
       .expectStatus(200)
       .expectJson("data.addProduct.name", nomeProduto);
 
+    assert.strictEqual(
+      respostaCriacao.json.errors,
+      undefined,
+      "A criação do produto retornou erros GraphQL"
+    );
+
     const produtos = await spec()
       .get(urlProdutos)
       .expectStatus(200)
@@ -101,7 +107,7 @@ describe("Serviço de Produtos", () => {
   });
 
   it("deve editar um produto", async () => {
-    await spec()
+    const respostaEdicao = await spec()
       .post(urlGraphQL)
       .withHeaders("Authorization", token)
       .withGraphQLQuery(`
@@ -134,6 +140,13 @@ describe("Serviço de Produtos", () => {
             additionalDetails: $additionalDetails
           ) {
             name
+            description
+            price
+            specialPrice
+            quantity
+            popular
+            visible
+            location
           }
         }
       `)
@@ -153,6 +166,16 @@ describe("Serviço de Produtos", () => {
       })
       .expectStatus(200);
 
+    assert.strictEqual(
+      respostaEdicao.json.errors,
+      undefined,
+      "A edição do produto retornou erros GraphQL"
+    );
+    assert.ok(
+      respostaEdicao.json.data.editProduct,
+      "A edição do produto não retornou o payload esperado"
+    );
+
     const produtos = await spec()
       .get(urlProdutos)
       .expectStatus(200)
@@ -170,7 +193,7 @@ describe("Serviço de Produtos", () => {
   });
 
   it("deve excluir um produto", async () => {
-    await spec()
+    const respostaExclusao = await spec()
       .post(urlGraphQL)
       .withHeaders("Authorization", token)
       .withGraphQLQuery(`
@@ -184,6 +207,16 @@ describe("Serviço de Produtos", () => {
         id: produtoId
       })
       .expectStatus(200);
+
+    assert.strictEqual(
+      respostaExclusao.json.errors,
+      undefined,
+      "A exclusão do produto retornou erros GraphQL"
+    );
+    assert.ok(
+      respostaExclusao.json.data.deleteProduct,
+      "A exclusão do produto não retornou o payload esperado"
+    );
 
     const produtos = await spec()
       .get(urlProdutos)

@@ -26,7 +26,7 @@ describe("Serviço de Categorias", () => {
   });
 
   it("deve adicionar uma categoria", async () => {
-    await spec()
+    const respostaCriacao = await spec()
       .post(urlGraphQL)
       .withHeaders("Authorization", token)
       .withGraphQLQuery(`
@@ -45,6 +45,12 @@ describe("Serviço de Categorias", () => {
       .expectJson("data.addCategory.name", nomeCategoria)
       .expectJson("data.addCategory.photo", fotoCategoria);
 
+    assert.strictEqual(
+      respostaCriacao.json.errors,
+      undefined,
+      "A criação da categoria retornou erros GraphQL"
+    );
+
     const categorias = await spec()
       .get(urlCategorias)
       .expectStatus(200)
@@ -60,7 +66,7 @@ describe("Serviço de Categorias", () => {
   });
 
   it("deve editar uma categoria", async () => {
-    await spec()
+    const respostaEdicao = await spec()
       .post(urlGraphQL)
       .withHeaders("Authorization", token)
       .withGraphQLQuery(`
@@ -78,6 +84,16 @@ describe("Serviço de Categorias", () => {
       })
       .expectStatus(200);
 
+    assert.strictEqual(
+      respostaEdicao.json.errors,
+      undefined,
+      "A edição da categoria retornou erros GraphQL"
+    );
+    assert.ok(
+      respostaEdicao.json.data.editCategory,
+      "A edição da categoria não retornou o payload esperado"
+    );
+
     const categorias = await spec()
       .get(urlCategorias)
       .expectStatus(200)
@@ -93,7 +109,7 @@ describe("Serviço de Categorias", () => {
   });
 
   it("deve excluir uma categoria", async () => {
-    await spec()
+    const respostaExclusao = await spec()
       .post(urlGraphQL)
       .withHeaders("Authorization", token)
       .withGraphQLQuery(`
@@ -108,6 +124,16 @@ describe("Serviço de Categorias", () => {
         id: categoriaId
       })
       .expectStatus(200);
+
+    assert.strictEqual(
+      respostaExclusao.json.errors,
+      undefined,
+      "A exclusão da categoria retornou erros GraphQL"
+    );
+    assert.ok(
+      respostaExclusao.json.data.deleteCategory,
+      "A exclusão da categoria não retornou o payload esperado"
+    );
 
     const categorias = await spec()
       .get(urlCategorias)
