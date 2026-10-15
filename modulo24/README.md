@@ -58,6 +58,33 @@ Para visualizar os contratos publicados no Pactum Flow:
 http://localhost:8080/#/projects
 ```
 
+## Executando a imagem Docker com Pactum Flow
+
+A imagem publicada no Docker Hub pode ser executada junto aos serviços definidos no `docker-compose.yml`.
+
+Primeiro, inicie o Pactum Flow e o MongoDB:
+
+```bash
+docker compose up -d
+```
+
+Identifique o nome da rede criada pelo Docker Compose:
+
+```bash
+docker network ls
+```
+
+Depois, execute a imagem de testes na mesma rede, informando a URL do Pactum Flow pelo nome do serviço `flows`:
+
+```bash
+docker run --rm \
+  --network <nome-da-rede-do-compose> \
+  -e PACTUM_FLOW_URL=http://flows:8080 \
+  talytamoy/exercicio-modulo24-api:latest
+```
+
+Dentro do container de testes, `localhost:8080` apontaria para o próprio container. Por isso, a comunicação com o Pactum Flow deve utilizar `http://flows:8080`, aproveitando a resolução de nomes da rede do Docker Compose.
+
 ## Resultado
 
 A suíte completa possui 9 testes automatizados, contemplando autenticação, categorias, produtos e contratos.
