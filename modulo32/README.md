@@ -44,7 +44,11 @@ Arquivos:
 
 ### NoSQL
 
-Consultas realizadas utilizando o arquivo `books.json` no MongoDB:
+Consultas realizadas utilizando o arquivo `books.json` no MongoDB.
+
+Na reexecução utilizada para gerar as evidências, a coleção continha **394 documentos**.
+
+Foram realizadas consultas para:
 
 - livros não publicados com menos de 300 páginas;
 - livros com `MongoDB` ou `SQL Server` no título;
