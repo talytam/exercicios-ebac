@@ -17,9 +17,11 @@ O projeto utiliza fixtures, comandos customizados e Page Object em parte dos cen
 
 O arquivo `Jenkinsfile` define um pipeline com etapas para:
 
-- obter o projeto;
-- instalar as dependências;
-- executar a suíte Cypress.
+- realizar o checkout do repositório principal;
+- instalar as dependências dentro de `modulo15`;
+- executar a suíte Cypress do módulo.
+
+Dessa forma, o exercício permanece autocontido no repositório `exercicios-ebac`, sem depender do repositório antigo utilizado originalmente na atividade.
 
 ## Tecnologias
 
