@@ -1,8 +1,12 @@
-import { $, $$, browser, driver } from '@wdio/globals';
+import { $, browser, driver } from '@wdio/globals';
 
 class ShopPage {
-  get products() {
-    return $$('-ios predicate string:name == "productDetails"');
+  get browseTab() {
+    return $('id:tab-Browse');
+  }
+
+  productByIndex(index) {
+    return $('(//*[@name="productDetails"])[' + (index + 1) + ']');
   }
 
   get addToCartButton() {
@@ -50,28 +54,26 @@ class ShopPage {
   }
 
   async openBrowse() {
-    await browser.pause(5000);
-
-    // A consulta de elementos na Home apresentou instabilidade
-    // no WebDriverAgent durante as execuções no Sauce Labs.
-    await driver.touchAction({
-      action: 'tap',
-      x: 195,
-      y: 125
+    await this.browseTab.waitForDisplayed({
+      timeout: 20000
     });
 
-    await browser.pause(5000);
+    await this.browseTab.click();
+
+    await this.productByIndex(0).waitForDisplayed({
+      timeout: 20000
+    });
   }
 
   async addAvailableProductToCart() {
     for (let index = 0; index < 5; index++) {
-      const items = await this.products;
+      const item = this.productByIndex(index);
 
-      if (!items[index]) {
+      if (!(await item.isExisting())) {
         break;
       }
 
-      await items[index].click();
+      await item.click();
 
       await this.addToCartButton.waitForDisplayed({
         timeout: 20000
@@ -79,11 +81,24 @@ class ShopPage {
 
       await this.addToCartButton.click();
 
-      await browser.pause(2000);
+      let semEstoque = false;
 
-      if (await this.stockError.isExisting()) {
+      try {
+        await this.stockError.waitForDisplayed({
+          timeout: 3000
+        });
+        semEstoque = true;
+      } catch (error) {
+        semEstoque = false;
+      }
+
+      if (semEstoque) {
         await driver.back();
-        await browser.pause(3000);
+
+        await this.productByIndex(0).waitForDisplayed({
+          timeout: 20000
+        });
+
         continue;
       }
 
@@ -102,12 +117,18 @@ class ShopPage {
 
     await this.cartButton.click();
 
-    await browser.pause(3000);
+    await browser.waitUntil(
+      async () =>
+        (await this.addNewAddressButton.isExisting()) ||
+        (await this.continueToPaymentButton.isExisting()),
+      {
+        timeout: 20000,
+        timeoutMsg: 'A tela do carrinho não ficou pronta para continuar.'
+      }
+    );
   }
 
   async addAddressIfNeeded() {
-    await browser.pause(2000);
-
     if (!(await this.addNewAddressButton.isExisting())) {
       return;
     }
