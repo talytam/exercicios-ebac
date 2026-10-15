@@ -1,54 +1,49 @@
-# Testes End to End - Ebac Shop
-### Exercício para os alunos de Qualidade de software da EBAC 
+# Módulo 12 - Testes End-to-End com Cypress
 
-Ebac shop: http://lojaebac.ebaconline.art.br/
+Exercício de automação de um fluxo de compra ponta a ponta na EBAC Shop.
 
-## Clonando e executando em sua máquina
+## Fluxo automatizado
 
-### Pré-requisito:
+O cenário principal contempla:
 
--Node.js - Você encontra em: https://nodejs.org/en/
+- acesso à loja;
+- seleção de produto;
+- adição ao carrinho;
+- acesso ao checkout;
+- preenchimento dos dados de compra;
+- finalização do pedido;
+- validação da confirmação da compra.
 
--Visual Studio Code ou qualquer editor de texto - você encontra em: https://code.visualstudio.com/download
+O módulo também contém testes de login utilizando comandos customizados e dados de fixture.
 
--Git: você encontra em: https://git-scm.com/downloads
+## Estrutura
 
+Foi utilizado Page Object para concentrar o preenchimento dos dados de checkout, além de fixtures para massa de dados.
 
-Via terminal, rode os seguintes comandos:
-```  
-git clone https://github.com/EBAC-QE/testes-e2e-ebac-shop.git
+## Tecnologias
+
+- Cypress
+- JavaScript
+- Faker
+- Page Object
+- Fixtures
+
+## Execução
+
+Instale as dependências:
+
+```bash
+npm install
 ```
-```
-cd testes-e2e-ebac-shop
-```
 
-#### Para instalar as dependencias:
-```
-npm install 
+Execute em modo headless:
+
+```bash
+npm run cy:run
 ```
 
-#### Para executar em moodo Headlesss via console:
+Ou abra a interface do Cypress:
+
+```bash
+npm run cy:open
 ```
-npx cypress run
-```
-
-#### Para executar via Dashboard:
-```
-npx cypress open 
-```
-Após abrir o dasboard, clique na opção "Running integration tests" para rodar todos os testes.
-
-
-### Bibliotecas de apoio:
--Cypress: Framework de automação: https://cypress.io/
-
--Faker: Biblioteca para geração de massa de dados: https://www.npmjs.com/package/faker
-
-
-### Bom exercício ;) 
-Fábio & José Ernesto
-Qualidade de software
-
-
-
-
