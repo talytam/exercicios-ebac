@@ -34,6 +34,16 @@ Clientes:
 k6 run performance/clientes.js
 ```
 
+Por padrão, os scripts utilizam `http://localhost:3000` como URL base. Para executar os mesmos testes em outro ambiente, informe a variável `BASE_URL`:
+
+```bash
+k6 run -e BASE_URL=https://outro-ambiente.com performance/produtos.js
+```
+
+```bash
+k6 run -e BASE_URL=https://outro-ambiente.com performance/clientes.js
+```
+
 ## Resultado
 
 Produtos:
