@@ -34,6 +34,7 @@ Foram implementados testes de contrato com Pactum Flow para:
 - PactumJS
 - GraphQL
 - Pactum Flow
+- Docker Compose para os serviços de apoio
 
 ## Execução
 
