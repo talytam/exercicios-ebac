@@ -1,38 +1,41 @@
-﻿# Exercício Módulo 24 - Automação de API
+# Módulo 24 - Automação de API
 
-Projeto desenvolvido para o exercício do Módulo 24 do curso de Engenharia de Qualidade de Software da EBAC.
+Projeto desenvolvido para o exercício do Módulo 24 da formação de Engenharia de Qualidade de Software da EBAC.
 
 Foram implementados testes automatizados de API utilizando PactumJS, Mocha e GraphQL.
 
 ## Cenários automatizados
 
 ### Categorias
-- addCategory
-- editCategory
-- deleteCategory
+
+- criação;
+- edição;
+- exclusão.
 
 ### Produtos
-- addProduct
-- editProduct
-- deleteProduct
+
+- criação;
+- edição;
+- exclusão.
+
+As operações GraphQL possuem validações de resposta e são conferidas também por consultas à API.
 
 ## Testes de contrato
 
-Foram implementados testes de contrato utilizando Pactum Flow para:
+Foram implementados testes de contrato com Pactum Flow para:
 
-- addCategory
-- addProduct
+- `addCategory`;
+- `addProduct`.
 
-## Tecnologias utilizadas
+## Tecnologias
 
 - Node.js
 - Mocha
 - PactumJS
 - GraphQL
 - Pactum Flow
-- Docker
 
-## Executando o projeto
+## Execução
 
 Instale as dependências:
 
@@ -40,54 +43,23 @@ Instale as dependências:
 npm install
 ```
 
-Inicie os serviços do Pactum Flow e MongoDB com Docker:
+Inicie os serviços necessários:
 
 ```bash
 docker compose up -d
 ```
 
-Execute os testes:
+Execute:
 
 ```bash
 npm test
 ```
 
-Para visualizar os contratos publicados no Pactum Flow:
-
-```text
-http://localhost:8080/#/projects
-```
-
-## Executando a imagem Docker com Pactum Flow
-
-A imagem publicada no Docker Hub pode ser executada junto aos serviços definidos no `docker-compose.yml`.
-
-Primeiro, inicie o Pactum Flow e o MongoDB:
-
-```bash
-docker compose up -d
-```
-
-Identifique o nome da rede criada pelo Docker Compose:
-
-```bash
-docker network ls
-```
-
-Depois, execute a imagem de testes na mesma rede, informando a URL do Pactum Flow pelo nome do serviço `flows`:
-
-```bash
-docker run --rm \
-  --network <nome-da-rede-do-compose> \
-  -e PACTUM_FLOW_URL=http://flows:8080 \
-  talytamoy/exercicio-modulo24-api:latest
-```
-
-Dentro do container de testes, `localhost:8080` apontaria para o próprio container. Por isso, a comunicação com o Pactum Flow deve utilizar `http://flows:8080`, aproveitando a resolução de nomes da rede do Docker Compose.
+O uso da imagem Docker do projeto é explorado separadamente no **Módulo 27 - Docker for Testers**.
 
 ## Resultado
 
-A suíte completa possui 9 testes automatizados, contemplando autenticação, categorias, produtos e contratos.
+A suíte possui 9 testes automatizados, contemplando autenticação, categorias, produtos e contratos.
 
 ## Evidências
 
