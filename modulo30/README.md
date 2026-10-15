@@ -28,7 +28,7 @@ O workflow está na raiz do repositório, no caminho:
 
 Os comandos do pipeline são executados dentro da pasta `modulo30`, mantendo os arquivos do exercício organizados sem impedir o reconhecimento do workflow pelo GitHub Actions.
 
-Ele é executado em pushes para a branch `ci` e também pode ser iniciado manualmente pela aba **Actions** do GitHub.
+No repositório principal, o workflow pode ser iniciado manualmente pela aba **Actions**. A execução utilizada na atividade foi desenvolvida originalmente na branch `ci` do repositório `exercicio-modulo29-ios`.
 
 As credenciais necessárias são armazenadas em GitHub Secrets.
 
@@ -36,8 +36,7 @@ As credenciais necessárias são armazenadas em GitHub Secrets.
 
 Durante a adaptação do fluxo completo para o Device Farm, o app Loja EBAC apresentou instabilidade no carregamento de produtos e no carrinho. Para a atividade de CI, o workflow executa uma validação estável de autenticação no dispositivo iOS, comprovando a integração entre GitHub Actions, Appium/WebdriverIO e BrowserStack.
 
-O BrowserStack grava o vídeo da sessão executada, que pode ser utilizado como evidência da atividade.
-
+O BrowserStack grava o vídeo da sessão executada, utilizado como evidência da atividade.
 
 ## Evidência
 
